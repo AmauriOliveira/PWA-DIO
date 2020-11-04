@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import Api, { ResponseApi } from '../../commons/services/api';
+import Board from './components/Board';
 
 import { ContainerStyle } from './style';
 
@@ -18,6 +19,13 @@ const Main: React.FC = () => {
   return (
     <ContainerStyle>
       <div className="mb-2">A</div>
+      <Board
+        cases={data.cases}
+        todayDeaths={data.todayDeaths}
+        recovered={data.recovered}
+        deaths={data.deaths}
+        todayCases={data.todayCases}
+      />
     </ContainerStyle>
   );
 };
