@@ -1,16 +1,20 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Skeleton } from '../../../../components';
-import { ResponseApi } from '../../../../commons/services/api';
 import Card from '../Card';
 
-const Board: React.FC<ResponseApi> = ({
-  cases,
-  todayDeaths,
-  recovered,
-  deaths,
-  todayCases,
-}) => {
+export interface BoardProps {
+  data: {
+    cases: number;
+    todayDeaths: number;
+    recovered: number;
+    deaths: number;
+    todayCases: number;
+  };
+}
+
+const Board: React.FC<BoardProps> = ({ data }) => {
+  const { cases, todayDeaths, recovered, deaths, todayCases } = data;
   const getValue: any = (value: any) =>
     value || <Skeleton variant="text" width={182} height={60} />;
   return (
@@ -47,10 +51,13 @@ const Board: React.FC<ResponseApi> = ({
 };
 
 Board.propTypes = {
-  cases: PropTypes.number.isRequired,
-  todayDeaths: PropTypes.number.isRequired,
-  recovered: PropTypes.number.isRequired,
-  deaths: PropTypes.number.isRequired,
-  todayCases: PropTypes.number.isRequired,
+  data: PropTypes.shape({
+    cases: PropTypes.number.isRequired,
+    todayDeaths: PropTypes.number.isRequired,
+    recovered: PropTypes.number.isRequired,
+    deaths: PropTypes.number.isRequired,
+    todayCases: PropTypes.number.isRequired,
+  }).isRequired,
 };
+
 export default memo(Board);
