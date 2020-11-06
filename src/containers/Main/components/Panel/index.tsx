@@ -1,14 +1,7 @@
 /* eslint-disable prefer-const */
 import React, { ChangeEvent, memo } from 'react';
 import PropTypes from 'prop-types';
-import RefreshIcon from '../../../../assets/images/refresh.svg';
-import {
-  Card,
-  Typography,
-  Button,
-  Select,
-  MenuItem,
-} from '../../../../components';
+import { Card, Typography, Select, MenuItem } from '../../../../components';
 import COUNTRIES from '../../../../commons/constants/countries';
 import { CardPanelContentStyled, ItemStyled } from '../style';
 
@@ -37,15 +30,7 @@ interface PanelProps {
   getCovidData(find: string): void;
 }
 
-const Panel: React.FC<PanelProps> = ({
-  updateAt,
-  onChange,
-  data,
-  country,
-  getCovidData,
-}) => {
-  const { cases, todayDeaths, recovered, deaths, todayCases } = data;
-
+const Panel: React.FC<PanelProps> = ({ updateAt, onChange, country }) => {
   const renderCountries = (
     countryItem: MenuItemRenderProps,
     index: number,
@@ -77,7 +62,6 @@ const Panel: React.FC<PanelProps> = ({
             </Select>
           </div>
         </div>
-        {/* {navigator.share ? renderShareButton : renderCopyButton} */}
       </CardPanelContentStyled>
     </Card>
   );
@@ -85,16 +69,8 @@ const Panel: React.FC<PanelProps> = ({
 
 Panel.propTypes = {
   updateAt: PropTypes.string.isRequired,
-  data: PropTypes.shape({
-    cases: PropTypes.number.isRequired,
-    todayDeaths: PropTypes.number.isRequired,
-    recovered: PropTypes.number.isRequired,
-    deaths: PropTypes.number.isRequired,
-    todayCases: PropTypes.number.isRequired,
-  }).isRequired,
   country: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  getCovidData: PropTypes.func.isRequired,
 };
 
 export default memo(Panel);
